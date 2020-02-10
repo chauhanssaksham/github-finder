@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import UserItem from './UserItem'
 
-export class Users extends Component {
+class Users extends Component {
     state = {
         users: [
             {
@@ -23,11 +23,11 @@ export class Users extends Component {
                 html_url: "https://github.com/mojombo"
             }
         ]
-    }
+    };
     render() {
         return (
             <div style={userStyle}>
-                {this.state.users.map(user => (
+                {this.props.users.map(user => (
                     <UserItem key={user.id} user={user} />
             ))}
             </div> 
