@@ -8,7 +8,9 @@ export class Search extends Component {
     }
     
     static propTypes = {
-        searchUsers: PropTypes.func.isRequired
+        searchUsers: PropTypes.func.isRequired,
+        clearUsers: PropTypes.func.isRequired,
+        usersLength: PropTypes.number.isRequired
     }
 
     onChange = e => this.setState({[e.target.name]: e.target.value});
@@ -18,7 +20,10 @@ export class Search extends Component {
         this.props.searchUsers(this.state.text);
         this.setState({ text: '' });
     };
-    
+    onClear = (e) => {
+        e.preventDefault();
+        this.props.clearUsers();
+    }
     render() {
         return (
             <div>
@@ -30,7 +35,9 @@ export class Search extends Component {
                         value={this.state.text } 
                         onChange={this.onChange}
                     />
-                    <input type="submit" value="Search" className="btn btn-dark btn-block" /> 
+                    <input type="submit" value="Search" className="btn btn-dark btn-block" 
+                        onClick={this.onSubmit}/> 
+                    {this.props.usersLength>0?<input type="submit" value="Clear" className="btn btn-dark btn-block" onClick={this.onClear}/>:null}
                 </form>
             </div>
         )
